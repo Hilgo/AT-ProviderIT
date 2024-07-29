@@ -15,14 +15,14 @@ namespace UsuariosApi.Services
         {
             _configuration = configuration;
         }
-        public string GenerateToken(Usuario usuario)
+        public string GenerateToken(Usuario usuario, string role)
         {
             Claim[] claims = new Claim[]
             {
                 new Claim("username", usuario.UserName),
                 new Claim("id", usuario.Id),
-                new Claim(ClaimTypes.DateOfBirth, usuario.DataNascimento.ToString()),
-                new Claim("loginTimestamp", DateTime.UtcNow.ToString())
+                new Claim("loginTimestamp", DateTime.UtcNow.ToString()),
+                new Claim(ClaimTypes.Role, role)
             };
 
             var chave = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_configuration["SymmetricSecurityKey"]));

@@ -26,6 +26,11 @@ namespace UsuariosApi.Services
             {
                 throw new ApplicationException("Falha ao cadastrar usuário!");
             }
+            else
+            {
+                // Atribua a role "User" por padrão
+                await _userManager.AddToRoleAsync(usuario, "User");
+            }
 
         }
     }

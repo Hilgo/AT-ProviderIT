@@ -32,7 +32,19 @@ namespace UsuariosApi.Services
                .UserManager
                .Users.FirstOrDefault(user => user.NormalizedUserName == dto.Username.ToUpper());
 
-            var token = _tokenService.GenerateToken(usuario);
+            var token = "";
+            var role = "";
+
+            if (usuario != null) { 
+                if (await _userManager.IsInRoleAsync(usuario, "User"))
+                    role = "User";
+            
+
+                if (await _userManager.IsInRoleAsync(usuario, "Admin"))
+                    role = "Admin";
+
+                token = _tokenService.GenerateToken(usuario, role);
+            }
 
             return token;
         }
