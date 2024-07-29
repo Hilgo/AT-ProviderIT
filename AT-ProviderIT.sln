@@ -3,9 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.5.33627.172
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WebApi", "WebApi\WebApi.csproj", "{5887DF45-E841-4D80-9D8E-FB88B26B03E4}"
-EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "UsuariosApi", "Identity\UsuariosApi.csproj", "{C6CFBCFC-173D-4A67-8FAD-6D8E3499DA3B}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GerenciamentoTarefasApi", "Identity\GerenciamentoTarefasApi.csproj", "{C6CFBCFC-173D-4A67-8FAD-6D8E3499DA3B}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -13,10 +11,6 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{5887DF45-E841-4D80-9D8E-FB88B26B03E4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{5887DF45-E841-4D80-9D8E-FB88B26B03E4}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{5887DF45-E841-4D80-9D8E-FB88B26B03E4}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{5887DF45-E841-4D80-9D8E-FB88B26B03E4}.Release|Any CPU.Build.0 = Release|Any CPU
 		{C6CFBCFC-173D-4A67-8FAD-6D8E3499DA3B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{C6CFBCFC-173D-4A67-8FAD-6D8E3499DA3B}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{C6CFBCFC-173D-4A67-8FAD-6D8E3499DA3B}.Release|Any CPU.ActiveCfg = Release|Any CPU
