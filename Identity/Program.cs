@@ -1,12 +1,15 @@
+using GerenciamentoTarefasApi.Data;
 using GerenciamentoTarefasApi.Services;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
 using System.Text;
+using System.Text.Json.Serialization;
 using UsuariosApi.Data;
 using UsuariosApi.Models;
 using UsuariosApi.Services;
+
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -27,7 +30,18 @@ builder.Services
 
 builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
 
-builder.Services.AddControllers();
+builder.Services.AddControllers()
+    .AddJsonOptions(options =>
+    {
+        options.JsonSerializerOptions.PropertyNamingPolicy = null; // Preserva os nomes das propriedades
+        options.JsonSerializerOptions.WriteIndented = true; // Formata o JSON de forma legível
+        options.JsonSerializerOptions.Converters.Add(new JsonStringEnumConverter()); // Converte enums para strings
+    });
+
+builder.Services.Configure<Microsoft.AspNetCore.Http.Json.JsonOptions>(
+    options => options.SerializerOptions.ReferenceHandler = ReferenceHandler.IgnoreCycles
+    );
+
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
@@ -48,14 +62,15 @@ builder.Services.AddAuthentication(options =>
     };
 });
 
-
-
 builder.Services.AddScoped<IUsuarioService, UsuarioService>();
 builder.Services.AddScoped<ITarefaService, TarefaService>();
+builder.Services.AddScoped<ICadastroService, CadastroService>();
+builder.Services.AddScoped<ITokenService, TokenService>();
+
+builder.Services.AddScoped<IApplicationDbContext>(provider => provider.GetService<ApplicationDbContext>());
 
 builder.Services.AddScoped<RoleManagerService>();
-builder.Services.AddScoped<CadastroService>();
-builder.Services.AddScoped<TokenService>();
+
 
 var app = builder.Build();
 

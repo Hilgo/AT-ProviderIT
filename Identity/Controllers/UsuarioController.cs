@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using GerenciamentoTarefasApi.Services;
+using Microsoft.AspNetCore.Mvc;
 using UsuariosApi.Data.Dtos;
 using UsuariosApi.Services;
 
@@ -8,11 +9,11 @@ namespace UsuariosApi.Controllers
     [Route("[Controller]")]
     public class UsuarioController : ControllerBase
     {
-        private CadastroService _cadastroService;
+        private readonly ICadastroService _cadastroService;
 
-        private UsuarioService _usuarioService;
+        private readonly IUsuarioService _usuarioService;
 
-        public UsuarioController(CadastroService cadastroService, UsuarioService usuarioService)
+        public UsuarioController(ICadastroService cadastroService, IUsuarioService usuarioService)
         {
             _cadastroService = cadastroService;
             _usuarioService = usuarioService;

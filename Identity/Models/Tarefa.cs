@@ -20,7 +20,7 @@ namespace GerenciamentoTarefasApi.Models
         public DateTime DataVencimento { get; set; }
 
         [Required]
-        public TaskStatus Status { get; set; }
+        public StatusTarefa Status { get; set; }
 
         // Chave estrangeira para o usuário responsável
         [ForeignKey("UsuarioAssocioado")]

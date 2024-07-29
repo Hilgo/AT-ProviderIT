@@ -11,15 +11,16 @@ namespace UsuariosApi.Services
         private IMapper _mapper;
         private UserManager<Usuario> _userManager;
         private SignInManager<Usuario> _signInManager;
-        private TokenService _tokenService;
+        private ITokenService _tokenService;
 
-        public UsuarioService(IMapper mapper, UserManager<Usuario> userManager, SignInManager<Usuario> signInManager, TokenService tokenService)
+        public UsuarioService(IMapper mapper, UserManager<Usuario> userManager, SignInManager<Usuario> signInManager, ITokenService tokenService)
         {
             _mapper = mapper;
             _userManager = userManager;
             _signInManager = signInManager;
             _tokenService = tokenService;
         }
+
 
         public async Task<string> Login(LoginUsuarioDto dto)
         {

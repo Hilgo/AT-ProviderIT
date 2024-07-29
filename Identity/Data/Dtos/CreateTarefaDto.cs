@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using GerenciamentoTarefasApi.Models;
+using System.ComponentModel.DataAnnotations;
 
 namespace GerenciamentoTarefasApi.Data.Dtos
 {
@@ -18,6 +19,6 @@ namespace GerenciamentoTarefasApi.Data.Dtos
         public string UsuarioAssocioadoId { get; set; }
 
         [Required]
-        public TaskStatus Status { get; set; }
+        public StatusTarefa Status { get; set; }
     }
 }

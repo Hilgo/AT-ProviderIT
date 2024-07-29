@@ -7,6 +7,6 @@ namespace UsuariosApi.Models
     {
         public Usuario() : base() { }
 
-        public List<Tarefa> Tasks { get; set; } = new List<Tarefa>();
+        public List<Tarefa> Tarefas { get; set; } = new List<Tarefa>();
     }
 }

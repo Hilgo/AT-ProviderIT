@@ -12,7 +12,11 @@ namespace UsuariosApi.Profiles
         {
             CreateMap<CreateUsuarioDto, Usuario>();
             CreateMap<CreateTarefaDto, Tarefa>()
-                .ForMember(dest => dest.Status, opt => opt.MapFrom(src => src.Status)); ;
+                .ForMember(dest => dest.Status, opt => opt.MapFrom(src => src.Status))
+                .ReverseMap();
+            CreateMap<UpdateTarefaDto, Tarefa>()
+                .ForMember(dest => dest.Status, opt => opt.MapFrom(src => src.Status))
+                .ReverseMap();
         }
     }
 }

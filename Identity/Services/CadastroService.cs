@@ -5,7 +5,7 @@ using UsuariosApi.Models;
 
 namespace UsuariosApi.Services
 {
-    public class CadastroService
+    public class CadastroService : ICadastroService
     {
         private IMapper _mapper;
         private UserManager<Usuario> _userManager;

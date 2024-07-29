@@ -5,6 +5,9 @@ using System.Security.Claims;
 using GerenciamentoTarefasApi.Models;
 using GerenciamentoTarefasApi.Data.Dtos;
 using GerenciamentoTarefasApi.Services;
+using System.Text.Json;
+using System.Threading.Tasks;
+using AutoMapper;
 
 namespace GerenciamentoTarefasApi.Controllers
 {
@@ -14,32 +17,39 @@ namespace GerenciamentoTarefasApi.Controllers
     public class TarefaController : Controller
     {
         private readonly ITarefaService _taskService;
+        private readonly IMapper _mapper;
 
-        public TarefaController(ITarefaService taskService)
+
+        public TarefaController(ITarefaService taskService, IMapper mapper)
         {
             _taskService = taskService;
+            _mapper = mapper;
         }
 
         // GET: api/tasks
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<Tarefa>>> GetTasks()
+        public async Task<ActionResult<IEnumerable<CreateTarefaDto>>> GetTasks()
         {
-            // Verifica se o usuário é administrador
             var isAdmin = HttpContext.User.IsInRole("Admin");
+
+            IEnumerable<Tarefa> tasks;
 
             // Se for administrador, busca todas as tarefas
             if (isAdmin)
             {
-                var tasks = await _taskService.GetAllTasksAsync();
-                return Ok(tasks);
+                tasks = await _taskService.GetAllTasksAsync();
             }
             else
             {
                 // Se não for administrador, busca apenas as tarefas do usuário logado
                 var userId = GetCurrentUserId();
-                var tasks = await _taskService.GetAllTasksAsync(userId);
-                return Ok(tasks);
+                tasks = await _taskService.GetAllTasksAsync(userId);
             }
+
+            // Mapeia as tarefas para TarefaDto
+            var tasksDto = _mapper.Map<IEnumerable<CreateTarefaDto>>(tasks);
+
+            return Ok(tasksDto);
         }
 
         // GET: api/tasks/5
@@ -56,7 +66,8 @@ namespace GerenciamentoTarefasApi.Controllers
             // Verifica se o usuário é administrador ou se é o responsável pela tarefa
             if (IsAdminOrTaskOwner(task))
             {
-                return Ok(task);
+                var tasksDto = _mapper.Map<CreateTarefaDto>(task);
+                return Ok(tasksDto);
             }
             else
             {

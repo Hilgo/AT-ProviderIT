@@ -4,10 +4,11 @@ using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 using System.Text;
 using UsuariosApi.Models;
+using GerenciamentoTarefasApi.Services;
 
 namespace UsuariosApi.Services
 {
-    public class TokenService
+    public class TokenService : ITokenService
     {
         private IConfiguration _configuration;
 
