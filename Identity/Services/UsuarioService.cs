@@ -1,11 +1,12 @@
 ﻿using AutoMapper;
+using GerenciamentoTarefasApi.Services;
 using Microsoft.AspNetCore.Identity;
 using UsuariosApi.Data.Dtos;
 using UsuariosApi.Models;
 
 namespace UsuariosApi.Services
 {
-    public class UsuarioService
+    public class UsuarioService : IUsuarioService
     {
         private IMapper _mapper;
         private UserManager<Usuario> _userManager;

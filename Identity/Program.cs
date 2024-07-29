@@ -1,3 +1,4 @@
+using GerenciamentoTarefasApi.Services;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
@@ -13,7 +14,7 @@ var builder = WebApplication.CreateBuilder(args);
 
 var connString = builder.Configuration.GetConnectionString("UsuarioConnection");
 
-builder.Services.AddDbContext<UsuarioDbContext>
+builder.Services.AddDbContext<ApplicationDbContext>
     (opts =>
     {
         opts.UseSqlServer(connString);
@@ -21,7 +22,7 @@ builder.Services.AddDbContext<UsuarioDbContext>
 
 builder.Services
     .AddIdentity<Usuario, IdentityRole>()
-    .AddEntityFrameworkStores<UsuarioDbContext>()
+    .AddEntityFrameworkStores<ApplicationDbContext>()
     .AddDefaultTokenProviders();
 
 builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
@@ -47,7 +48,12 @@ builder.Services.AddAuthentication(options =>
     };
 });
 
-builder.Services.AddScoped<UsuarioService>();
+
+
+builder.Services.AddScoped<IUsuarioService, UsuarioService>();
+builder.Services.AddScoped<ITarefaService, TarefaService>();
+
+builder.Services.AddScoped<RoleManagerService>();
 builder.Services.AddScoped<CadastroService>();
 builder.Services.AddScoped<TokenService>();
 
